@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./login.module.css";
 
 const Login = (props) => {
@@ -20,7 +21,11 @@ const Login = (props) => {
         />
         <button className={styles.loginButton}>Login</button>
       </form>
-      <button className={styles.loginRegisterButton}>Register</button>
+      <button className={styles.loginRegisterButton}>
+        <Link className="link" to="/register">
+          Register
+        </Link>
+      </button>
     </div>
   );
 };

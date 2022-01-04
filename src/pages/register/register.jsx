@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./register.module.css";
 
 const Register = (props) => {
@@ -26,7 +27,11 @@ const Register = (props) => {
         />
         <button className={styles.registerButton}>Resister</button>
       </form>
-      <button className={styles.registerLoginButton}>Login</button>
+      <button className={styles.registerLoginButton}>
+        <Link className="link" to="/login">
+          Login
+        </Link>
+      </button>
     </div>
   );
 };
