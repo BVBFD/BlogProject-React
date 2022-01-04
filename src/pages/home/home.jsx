@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../../header/header";
-import Posts from "../../posts/posts";
-import Sidebar from "../../sidebar/sidebar";
+import Header from "../../components/header/header";
+import Posts from "../../components/posts/posts";
+import Sidebar from "../../components/sidebar/sidebar";
 import styles from "./home.module.css";
 
 const Home = (props) => {
