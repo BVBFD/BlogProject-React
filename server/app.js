@@ -25,6 +25,7 @@ app.use("/api/auth", authRoute);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
+  // gitignore 실험 중
 });
 
 app.use((error, req, res, next) => {
