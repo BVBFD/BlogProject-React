@@ -6,6 +6,7 @@ import helmet from "helmet";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoute from "./routes/auth.js";
+import userRoute from "./routes/users.js";
 
 dotenv.config();
 
@@ -22,10 +23,10 @@ app.use("/lee", (req, res, next) => {
 });
 
 app.use("/api/auth", authRoute);
+app.use("/api/user", userRoute);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
-  // gitignore 실험 중
 });
 
 app.use((error, req, res, next) => {
