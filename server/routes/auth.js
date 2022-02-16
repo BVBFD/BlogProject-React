@@ -38,4 +38,20 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+// update
+router.put("/", async (req, res, next) => {
+  try {
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// delete
+router.delete("/", async (req, res, next) => {
+  try {
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 export default router;
