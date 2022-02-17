@@ -5,8 +5,10 @@ import morgan from "morgan";
 import helmet from "helmet";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import authRoute from "./routes/auth.js";
-import userRoute from "./routes/users.js";
+import authRouter from "./routes/auth.js";
+import userRouter from "./routes/users.js";
+import postRouter from "./routes/posts.js";
+import categoryRouter from "./routes/categories.js";
 
 dotenv.config();
 
@@ -22,8 +24,10 @@ app.use("/lee", (req, res, next) => {
   return res.status(200).send(console.log("success!"));
 });
 
-app.use("/api/auth", authRoute);
-app.use("/api/user", userRoute);
+app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
+app.use("/api/post", postRouter);
+app.use("/api/category", categoryRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
