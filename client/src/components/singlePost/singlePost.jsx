@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./singlePost.module.css";
 
 const SinglePost = (props) => {
@@ -16,7 +16,7 @@ const SinglePost = (props) => {
     };
     getPost();
   }, [path]);
-  console.log(post);
+
   return (
     <div className={styles.singlePost}>
       <div className={styles.singlePostWrapper}>
@@ -32,7 +32,10 @@ const SinglePost = (props) => {
         </h1>
         <div className={styles.singlePostInfo}>
           <span className={styles.singlePostAuthor}>
-            Author: <b>{post.username}</b>
+            Author:
+            <Link to={`/?user=${post.username}`} className="link">
+              <b>{post.username}</b>
+            </Link>
           </span>
           <span className={styles.singlePostDate}>
             {new Date(post.createdAt).toDateString()}

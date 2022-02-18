@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "../../components/header/header";
 import Posts from "../../components/posts/posts";
 import Sidebar from "../../components/sidebar/sidebar";
@@ -7,6 +8,7 @@ import styles from "./home.module.css";
 
 const Home = (props) => {
   const [posts, setPosts] = useState([]);
+  const { search } = useLocation();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -17,13 +19,14 @@ const Home = (props) => {
       // const result = await res.json();
       // console.log(result);
 
-      const res = await axios.get("/post");
+      const res = await axios.get(`/post${search}`);
       // package json에 proxy 서버 추가함 (axios 이용시).
       const result = res.data;
       setPosts(result);
     };
     fetchPosts();
-  }, []);
+  }, [search]);
+
   return (
     <>
       <Header />

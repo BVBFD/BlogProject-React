@@ -72,6 +72,7 @@ router.get("/:id", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   const username = req.query.user;
   const catName = req.query.cat;
+
   try {
     let posts;
     if (username) {
