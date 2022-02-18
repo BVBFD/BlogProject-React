@@ -1,17 +1,30 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styles from "./singlePost.module.css";
 
 const SinglePost = (props) => {
+  const location = useLocation();
+  const path = location.pathname.split("/")[2];
+  const [post, setPost] = useState({});
+
+  useEffect(() => {
+    const getPost = async () => {
+      const res = await axios.get("/post/" + path);
+      const result = res.data;
+      setPost(result);
+    };
+    getPost();
+  }, [path]);
+  console.log(post);
   return (
     <div className={styles.singlePost}>
       <div className={styles.singlePostWrapper}>
-        <img
-          src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-          alt=""
-          className={styles.singlePostImg}
-        />
+        {post.photo && (
+          <img src={post.photo} alt="" className={styles.singlePostImg} />
+        )}
         <h1 className={styles.singlePostTitle}>
-          Lorem ipsum dolor sit
+          {post.title}
           <div className={styles.singlePostEdit}>
             <i className="far fa-edit"></i>
             <i className="far fa-trash-alt"></i>
@@ -19,29 +32,13 @@ const SinglePost = (props) => {
         </h1>
         <div className={styles.singlePostInfo}>
           <span className={styles.singlePostAuthor}>
-            Author: <b>Safak</b>
+            Author: <b>{post.username}</b>
           </span>
-          <span className={styles.singlePostDate}>1 hour ago</span>
+          <span className={styles.singlePostDate}>
+            {new Date(post.createdAt).toDateString()}
+          </span>
         </div>
-        <p className={styles.singlePostDesc}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt et
-          nisi aspernatur, blanditiis recusandae libero inventore aperiam, fugit
-          officia fugiat rem praesentium. Earum id enim iusto doloremque
-          laudantium eum fugit! Lorem ipsum dolor sit amet consectetur,
-          adipisicing elit. Nesciunt et nisi aspernatur, blanditiis recusandae
-          libero inventore aperiam, fugit officia fugiat rem praesentium. Earum
-          id enim iusto doloremque laudantium eum fugit! Lorem ipsum dolor sit
-          amet consectetur, adipisicing elit. Nesciunt et nisi aspernatur,
-          blanditiis recusandae libero inventore aperiam, fugit officia fugiat
-          rem praesentium. Earum id enim iusto doloremque laudantium eum fugit!
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt et
-          nisi aspernatur, blanditiis recusandae libero inventore aperiam, fugit
-          officia fugiat rem praesentium. Earum id enim iusto doloremque
-          laudantium eum fugit! Lorem ipsum dolor sit amet consectetur,
-          adipisicing elit. Nesciunt et nisi aspernatur, blanditiis recusandae
-          libero inventore aperiam, fugit officia fugiat rem praesentium. Earum
-          id enim iusto doloremque laudantium eum fugit!
-        </p>
+        <p className={styles.singlePostDesc}>{post.desc}</p>
       </div>
     </div>
   );
