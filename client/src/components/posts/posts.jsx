@@ -2,15 +2,12 @@ import React from "react";
 import Post from "../post/post";
 import styles from "./posts.module.css";
 
-const Posts = (props) => {
+const Posts = ({ posts }) => {
   return (
     <div className={styles.posts}>
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+      {posts.map((post) => (
+        <Post post={post} />
+      ))}
     </div>
   );
 };
