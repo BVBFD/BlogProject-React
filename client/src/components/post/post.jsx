@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import styles from "./post.module.css";
 
 const Post = ({ post }) => {
+  console.log(post.photo);
+  const src = `http://localhost:5000/images/${post.photo}`;
+  console.log(src);
   return (
     <div className={styles.post}>
-      {post.photo && <img className={styles.postImg} src={post.photo} alt="" />}
+      {post.photo && <img className={styles.postImg} src={src} alt="" />}
       <div className={styles.postInfo}>
         <div className={styles.postCats}>
           {post.categories.map((category) => (

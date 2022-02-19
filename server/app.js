@@ -10,13 +10,20 @@ import userRouter from "./routes/users.js";
 import postRouter from "./routes/posts.js";
 import categoryRouter from "./routes/categories.js";
 import multer from "multer";
+import path from "path";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
 const app = express();
-
 app.use(express.json());
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+app.use("/images", express.static(path.join(__dirname, "/images")));
+
 app.use(helmet());
+
 app.use(cors());
 app.use(morgan("tiny"));
 
@@ -30,7 +37,7 @@ const storage = multer.diskStorage({
     cb(null, "images");
   },
   filename: (req, file, cb) => {
-    cb(null, "hello.jpeg");
+    cb(null, req.body.name);
   },
 });
 
