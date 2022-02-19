@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../../context/context.js";
 import styles from "./topbar.module.css";
 
 const Topbar = (props) => {
-  const user = false;
+  const { user, dispatch } = useContext(Context);
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
+  };
+
   return (
     <div className={styles.top}>
       <div className={styles.topLeft}>
@@ -34,16 +39,14 @@ const Topbar = (props) => {
               WRITE
             </Link>
           </li>
-          <li className={styles.topListItem}>{user && "LOGOUT"}</li>
+          <li className={styles.topListItem} onClick={handleLogout}>
+            {user && "LOGOUT"}
+          </li>
         </ul>
       </div>
       <div className={styles.topRight}>
         {user ? (
-          <img
-            className={styles.topImg}
-            src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-            alt=""
-          />
+          <img className={styles.topImg} src={user.profilePic} alt="" />
         ) : (
           <ul className={styles.topList}>
             <li className={styles.topListItem}>

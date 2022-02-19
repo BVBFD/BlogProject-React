@@ -7,7 +7,7 @@ import styles from "./login.module.css";
 const Login = (props) => {
   const userRef = useRef();
   const passwordRef = useRef();
-  const { user, dispatch, isFetching } = useContext(Context);
+  const { dispatch, isFetching } = useContext(Context);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -46,7 +46,11 @@ const Login = (props) => {
           placeholder="Enter your password..."
           ref={passwordRef}
         />
-        <button className={styles.loginButton} type="submit">
+        <button
+          className={styles.loginButton}
+          type="submit"
+          disabled={isFetching}
+        >
           Login
         </button>
       </form>
