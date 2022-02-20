@@ -5,6 +5,7 @@ import styles from "./topbar.module.css";
 
 const Topbar = (props) => {
   const { user, dispatch } = useContext(Context);
+  const src = `http://localhost:5000/images/${user.profilePic}`;
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
   };
@@ -46,7 +47,9 @@ const Topbar = (props) => {
       </div>
       <div className={styles.topRight}>
         {user ? (
-          <img className={styles.topImg} src={user.profilePic} alt="" />
+          <Link to="/settings">
+            <img className={styles.topImg} src={src} alt="" />
+          </Link>
         ) : (
           <ul className={styles.topList}>
             <li className={styles.topListItem}>
