@@ -3,6 +3,7 @@ import Sidebar from "../../components/sidebar/sidebar";
 import styles from "./settings.module.css";
 import { Context } from "../../context/context.js";
 import axios from "axios";
+import { axiosInstance } from "../../config";
 
 const Settings = (props) => {
   const { user, dispatch } = useContext(Context);
@@ -12,7 +13,7 @@ const Settings = (props) => {
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const src = `http://localhost:5000/images/${user.profilePic}`;
+  const src = `https://blogprojectorigin.herokuapp.com/images/${user.profilePic}`;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,11 +31,11 @@ const Settings = (props) => {
       data.append("file", file);
       updatedUser.profilePic = filename;
       try {
-        await axios.post("/upload", data);
+        await axiosInstance.post("/upload", data);
       } catch (err) {}
     }
     try {
-      const res = await axios.put(`/user/${user._id}`, updatedUser);
+      const res = await axiosInstance.put(`/user/${user._id}`, updatedUser);
       setSuccess(true);
       dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
     } catch (err) {

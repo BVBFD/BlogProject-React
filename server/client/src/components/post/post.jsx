@@ -4,7 +4,7 @@ import styles from "./post.module.css";
 
 const Post = ({ post }) => {
   console.log(post.photo);
-  const src = `http://localhost:5000/images/${post.photo}`;
+  const src = `https://blogprojectorigin.herokuapp.com/images/${post.photo}`;
   console.log(src);
   return (
     <div className={styles.post}>

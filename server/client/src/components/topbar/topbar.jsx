@@ -5,7 +5,9 @@ import styles from "./topbar.module.css";
 
 const Topbar = (props) => {
   const { user, dispatch } = useContext(Context);
-  const src = user ? `http://localhost:5000/images/${user.profilePic}` : null;
+  const src = user
+    ? `https://blogprojectorigin.herokuapp.com/images/${user.profilePic}`
+    : null;
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
   };

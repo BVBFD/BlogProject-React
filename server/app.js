@@ -43,13 +43,19 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 app.post("/api/upload", upload.single("file"), (req, res, next) => {
-  res.status(200).json("File has been uploaded");
+  res.status(200).json(`${__dirname}/images/${req.body.name}`);
 });
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/post", postRouter);
 app.use("/api/category", categoryRouter);
+
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
+});
 
 app.use((req, res, next) => {
   res.sendStatus(404);
@@ -65,6 +71,6 @@ mongoose
   .then(() => console.log("Mongo DB Init!!"))
   .catch((error) => console.error(error));
 
-app.listen("5000", () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log("Backend is running!");
 });
